@@ -147,10 +147,11 @@ namespace ConsoleApp1
                 }
             };
 
-            return root.ToString(Formatting.None);
+            return root.ToString(Newsoft.Json.Formatting.None);
         }
     }
 }
+
 
 
 
