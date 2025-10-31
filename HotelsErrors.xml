@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ISSUE 1: Wrong root element name "Hotel" (should be "Hotels") -->
+<Hotel>
+  <!-- OK hotel for comparison -->
+  <Hotel Id="H001" Rating="4.5">
+    <Name>The Westin Phoenix Downtown</Name>
+    <Phone>602-555-0101</Phone>
+    <Phone>602-555-0199</Phone>
+    <Address>
+      <Number>333</Number>
+      <Street>W Adams St</Street>
+      <City>Phoenix</City>
+      <State>AZ</State>
+      <Zip>85003</Zip>
+      <NearestAirport>PHX</NearestAirport>
+    </Address>
+  </Hotel>
+
+  <!-- ISSUE 2: Missing required Id attribute -->
+  <Hotel Rating="4.2">
+    <Name>Hyatt Regency Phoenix</Name>
+    <Phone>602-555-0102</Phone>
+    <Address>
+      <Number>122</Number>
+      <Street>N 2nd St</Street>
+      <City>Phoenix</City>
+      <State>AZ</State>
+      <Zip>85004</Zip>
+      <NearestAirport>PHX</NearestAirport>
+    </Address>
+  </Hotel>
+
+  <!-- ISSUE 3: Missing a <Phone> entirely -->
+  <Hotel Id="H003">
+    <Name>Kimpton Hotel Palomar Phoenix</Name>
+    <Address>
+      <Number>2</Number>
+      <Street>E Jefferson St</Street>
+      <City>Phoenix</City>
+      <State>AZ</State>
+      <Zip>85004</Zip>
+      <NearestAirport>PHX</NearestAirport>
+    </Address>
+  </Hotel>
+
+  <!-- Normal -->
+  <Hotel Id="H004" Rating="4.7">
+    <Name>Arizona Biltmore</Name>
+    <Phone>602-555-0104</Phone>
+    <Address>
+      <Number>2400</Number>
+      <Street>E Missouri Ave</Street>
+      <City>Phoenix</City>
+      <State>AZ</State>
+      <Zip>85016</Zip>
+      <NearestAirport>PHX</NearestAirport>
+    </Address>
+  </Hotel>
+
+  <!-- ISSUE 4: Address missing closing tag -->
+  <Hotel Id="H005">
+    <Name>Hilton Phoenix Resort at the Peak</Name>
+    <Phone>602-555-0105</Phone>
+    <Address>
+      <Number>7677</Number>
+      <Street>N 16th St</Street>
+      <City>Phoenix</City>
+      <State>AZ</State>
+      <Zip>85020</Zip>
+      <NearestAirport>PHX</NearestAirport>
+    <!-- </Address> is missing on purpose -->
+  </Hotel>
+
+  <!-- ISSUE 5: Duplicate <Name> -->
+  <Hotel Id="H006" Rating="4.1">
+    <Name>Sheraton Phoenix Downtown</Name>
+    <Name>Duplicate Name Should Not Exist</Name>
+    <Phone>602-555-0106</Phone>
+    <Phone>602-555-0177</Phone>
+    <Address>
+      <Number>340</Number>
+      <Street>N 3rd St</Street>
+      <City>Phoenix</City>
+      <State>AZ</State>
+      <Zip>85004</Zip>
+      <NearestAirport>PHX</NearestAirport>
+    </Address>
+  </Hotel>
+
+  <!-- A few normal ones to finish -->
+  <Hotel Id="H007">
+    <Name>AC Hotel Phoenix Downtown</Name>
+    <Phone>602-555-0107</Phone>
+    <Address>
+      <Number>414</Number>
+      <Street>N 5th St</Street>
+      <City>Phoenix</City>
+      <State>AZ</State>
+      <Zip>85004</Zip>
+      <NearestAirport>PHX</NearestAirport>
+    </Address>
+  </Hotel>
+
+  <Hotel Id="H008" Rating="4.0">
+    <Name>Courtyard Phoenix Downtown</Name>
+    <Phone>602-555-0108</Phone>
+    <Address>
+      <Number>132</Number>
+      <Street>S Central Ave</Street>
+      <City>Phoenix</City>
+      <State>AZ</State>
+      <Zip>85004</Zip>
+      <NearestAirport>PHX</NearestAirport>
+    </Address>
+  </Hotel>
+
+  <Hotel Id="H009">
+    <Name>Hampton Inn Phoenix Midtown</Name>
+    <Phone>602-555-0109</Phone>
+    <Phone>602-555-0166</Phone>
+    <Address>
+      <Number>160</Number>
+      <Street>W Catalina Dr</Street>
+      <City>Phoenix</City>
+      <State>AZ</State>
+      <Zip>85013</Zip>
+      <NearestAirport>PHX</NearestAirport>
+    </Address>
+  </Hotel>
+
+  <Hotel Id="H010" Rating="3.9">
+    <Name>Residence Inn Phoenix Downtown</Name>
+    <Phone>602-555-0110</Phone>
+    <Address>
+      <Number>132</Number>
+      <Street>S Central Ave</Street>
+      <City>Phoenix</City>
+      <State>AZ</State>
+      <Zip>85004</Zip>
+      <NearestAirport>PHX</NearestAirport>
+    </Address>
+  </Hotel>
+</Hotel>
+
+
+    
