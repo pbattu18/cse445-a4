@@ -10,9 +10,9 @@ namespace ConsoleApp1
     public class Program
     {
         // LIVE GitHub Pages URLs
-        public static string xmlURL = "https://pbattu18.github.io/cse445-a4/Hotels.xml";
-        public static string xmlErrorURL = "https://pbattu18.github.io/cse445-a4/HotelsErrors.xml";
-        public static string xsdURL = "https://pbattu18.github.io/cse445-a4/Hotels.xsd";
+        public static string xmlURL = "https://raw.githubusercontent.com/pbattu18/cse445-a4/master/Hotels.xml";
+        public static string xmlErrorURL = "https://raw.githubusercontent.com/pbattu18/cse445-a4/master/HotelsErrors.xml";
+        public static string xsdURL = "https://raw.githubusercontent.com/pbattu18/cse445-a4/master/Hotels.xsd";
 
         public static void Main(string[] args)
         {
@@ -151,6 +151,7 @@ namespace ConsoleApp1
         }
     }
 }
+
 
 
 
