@@ -1,58 +1,156 @@
 ﻿using System;
-using System.Xml.Schema;
+using System.Collections.Generic;
 using System.Xml;
+using System.Xml.Schema;
 using Newtonsoft.Json;
-using System.IO;
-
-
-
-/**
- * This template file is created for ASU CSE445 Distributed SW Dev Assignment 4.
- * Please do not modify or delete any existing class/variable/method names. However, you can add more variables and functions.
- * Uploading this file directly will not pass the autograder's compilation check, resulting in a grade of 0.
- * **/
-
+using Newtonsoft.Json.Linq;
 
 namespace ConsoleApp1
 {
-
-
     public class Program
     {
-        public static string xmlURL = "Your XML URL";
-        public static string xmlErrorURL = "Your Error XML URL";
-        public static string xsdURL = "Your XSD URL";
+        // LIVE GitHub Pages URLs
+        public static string xmlURL = "https://pbattu18.github.io/cse445-a4/Hotels.xml";
+        public static string xmlErrorURL = "https://pbattu18.github.io/cse445-a4/HotelsErrors.xml";
+        public static string xsdURL = "https://pbattu18.github.io/cse445-a4/Hotels.xsd";
 
         public static void Main(string[] args)
         {
+            // 1) Validate the good XML (should print exactly: No errors are found)
             string result = Verification(xmlURL, xsdURL);
             Console.WriteLine(result);
 
-
+            // 2) Validate the broken XML (should print collected errors/exceptions)
             result = Verification(xmlErrorURL, xsdURL);
             Console.WriteLine(result);
 
-
+            // 3) Convert valid XML to JSON (omit _Rating when missing)
             result = Xml2Json(xmlURL);
             Console.WriteLine(result);
         }
 
-        // Q2.1
+        // Validate XML (by URL) against XSD (by URL).
+        // Return "No errors are found" when valid; otherwise return joined error messages (or exception text).
         public static string Verification(string xmlUrl, string xsdUrl)
         {
+            var messages = new List<string>();
 
+            try
+            {
+                var settings = new XmlReaderSettings
+                {
+                    ValidationType = ValidationType.Schema,
+                    DtdProcessing = DtdProcessing.Prohibit
+                };
 
-            //return "No Error" if XML is valid. Otherwise, return the desired exception message.
+                settings.Schemas.Add(null, xsdUrl);
+                settings.ValidationFlags =
+                    XmlSchemaValidationFlags.ReportValidationWarnings |
+                    XmlSchemaValidationFlags.ProcessInlineSchema |
+                    XmlSchemaValidationFlags.ProcessSchemaLocation;
+
+                settings.ValidationEventHandler += (sender, e) =>
+                {
+                    string where = "";
+                    if (sender is IXmlLineInfo li && li.HasLineInfo())
+                        where = $"(line {li.LineNumber}, pos {li.LinePosition}) ";
+                    messages.Add($"{e.Severity}: {where}{e.Message}");
+                };
+
+                using (var reader = XmlReader.Create(xmlUrl, settings))
+                {
+                    while (reader.Read()) { /* validation happens during Read() */ }
+                }
+            }
+            catch (Exception ex)
+            {
+                messages.Add($"Exception: {ex.Message}");
+            }
+
+            return messages.Count == 0 ? "No errors are found" : string.Join("\n", messages);
         }
 
+        // Convert valid XML (by URL) to JSON with required shape:
+        // - Multiple <Phone> -> array
+        // - Address as object with Number/Street/City/State/Zip/NearestAirport
+        // - Optional Rating attribute on <Hotel> becomes "_Rating" (omit if absent)
         public static string Xml2Json(string xmlUrl)
         {
-            
+            var doc = new XmlDocument { XmlResolver = null };
+            doc.Load(xmlUrl);
 
-            // The returned jsonText needs to be de-serializable by Newtonsoft.Json package. (JsonConvert.DeserializeXmlNode(jsonText))
-            return jsonText;
+            var hotelsArray = new JArray();
+            var hotelNodes = doc.SelectNodes("/Hotels/Hotel");
+            if (hotelNodes != null)
+            {
+                foreach (XmlNode hotel in hotelNodes)
+                {
+                    var jHotel = new JObject();
 
+                    // Name
+                    var nameNode = hotel.SelectSingleNode("Name");
+                    if (nameNode != null)
+                        jHotel["Name"] = nameNode.InnerText.Trim();
+
+                    // Phones -> array
+                    var phoneNodes = hotel.SelectNodes("Phone");
+                    if (phoneNodes != null && phoneNodes.Count > 0)
+                    {
+                        var phones = new JArray();
+                        foreach (XmlNode p in phoneNodes)
+                        {
+                            var t = p.InnerText.Trim();
+                            if (!string.IsNullOrEmpty(t)) phones.Add(t);
+                        }
+                        if (phones.Count > 0)
+                            jHotel["Phone"] = phones;
+                    }
+
+                    // Address object
+                    var addr = hotel.SelectSingleNode("Address");
+                    if (addr != null)
+                    {
+                        var jAddr = new JObject();
+
+                        void put(string tag)
+                        {
+                            var n = addr.SelectSingleNode(tag);
+                            if (n != null && !string.IsNullOrWhiteSpace(n.InnerText))
+                                jAddr[tag] = n.InnerText.Trim();
+                        }
+
+                        put("Number");
+                        put("Street");
+                        put("City");
+                        put("State");
+                        put("Zip");
+                        put("NearestAirport");
+
+                        if (jAddr.Count > 0)
+                            jHotel["Address"] = jAddr;
+                    }
+
+                    // Optional Rating attribute -> "_Rating"
+                    var rating = hotel.Attributes?["Rating"]?.Value;
+                    if (!string.IsNullOrWhiteSpace(rating))
+                        jHotel["_Rating"] = rating.Trim();
+
+                    hotelsArray.Add(jHotel);
+                }
+            }
+
+            var root = new JObject
+            {
+                ["Hotels"] = new JObject
+                {
+                    ["Hotel"] = hotelsArray
+                }
+            };
+
+            return root.ToString(Formatting.None);
         }
     }
-
 }
+
+
+
