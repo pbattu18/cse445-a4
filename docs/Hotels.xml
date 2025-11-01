@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Hotels>
-  <Hotel Id="H001" Rating="4.5">
+<Hotels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://pbattu18.github.io/cse445-a4/Hotels.xsd">
+
+  <!-- Required sample from handout -->
+  <Hotel Id="H001" Rating="4.2">
+    <Name>Westin</Name>
+    <Phone>480-968-8885</Phone>
+    <Phone>800-937-8461</Phone>
+    <Address>
+      <Number>11</Number>
+      <Street>E 7th St</Street>
+      <City>Tempe</City>
+      <State>AZ</State>
+      <Zip>85281</Zip>
+      <NearestAirport>Sky Habor</NearestAirport>
+    </Address>
+  </Hotel>
+
+  <Hotel Id="H002" Rating="4.5">
     <Name>The Westin Phoenix Downtown</Name>
     <Phone>602-555-0101</Phone>
     <Phone>602-555-0199</Phone>
@@ -13,7 +30,8 @@
       <NearestAirport>PHX</NearestAirport>
     </Address>
   </Hotel>
-  <Hotel Id="H002" Rating="4.2">
+
+  <Hotel Id="H003" Rating="4.2">
     <Name>Hyatt Regency Phoenix</Name>
     <Phone>602-555-0102</Phone>
     <Address>
@@ -25,7 +43,8 @@
       <NearestAirport>PHX</NearestAirport>
     </Address>
   </Hotel>
-  <Hotel Id="H003">
+
+  <Hotel Id="H004">
     <Name>Kimpton Hotel Palomar Phoenix</Name>
     <Phone>602-555-0103</Phone>
     <Phone>602-555-0188</Phone>
@@ -38,7 +57,8 @@
       <NearestAirport>PHX</NearestAirport>
     </Address>
   </Hotel>
-  <Hotel Id="H004" Rating="4.7">
+
+  <Hotel Id="H005" Rating="4.7">
     <Name>Arizona Biltmore</Name>
     <Phone>602-555-0104</Phone>
     <Address>
@@ -50,7 +70,8 @@
       <NearestAirport>PHX</NearestAirport>
     </Address>
   </Hotel>
-  <Hotel Id="H005">
+
+  <Hotel Id="H006">
     <Name>Hilton Phoenix Resort at the Peak</Name>
     <Phone>602-555-0105</Phone>
     <Address>
@@ -62,7 +83,8 @@
       <NearestAirport>PHX</NearestAirport>
     </Address>
   </Hotel>
-  <Hotel Id="H006" Rating="4.1">
+
+  <Hotel Id="H007" Rating="4.1">
     <Name>Sheraton Phoenix Downtown</Name>
     <Phone>602-555-0106</Phone>
     <Phone>602-555-0177</Phone>
@@ -75,7 +97,8 @@
       <NearestAirport>PHX</NearestAirport>
     </Address>
   </Hotel>
-  <Hotel Id="H007">
+
+  <Hotel Id="H008">
     <Name>AC Hotel Phoenix Downtown</Name>
     <Phone>602-555-0107</Phone>
     <Address>
@@ -87,7 +110,8 @@
       <NearestAirport>PHX</NearestAirport>
     </Address>
   </Hotel>
-  <Hotel Id="H008" Rating="4.0">
+
+  <Hotel Id="H009" Rating="4.0">
     <Name>Courtyard Phoenix Downtown</Name>
     <Phone>602-555-0108</Phone>
     <Address>
@@ -99,7 +123,8 @@
       <NearestAirport>PHX</NearestAirport>
     </Address>
   </Hotel>
-  <Hotel Id="H009">
+
+  <Hotel Id="H010">
     <Name>Hampton Inn Phoenix Midtown</Name>
     <Phone>602-555-0109</Phone>
     <Phone>602-555-0166</Phone>
@@ -112,7 +137,8 @@
       <NearestAirport>PHX</NearestAirport>
     </Address>
   </Hotel>
-  <Hotel Id="H010" Rating="3.9">
+
+  <Hotel Id="H011" Rating="3.9">
     <Name>Residence Inn Phoenix Downtown</Name>
     <Phone>602-555-0110</Phone>
     <Address>
@@ -124,7 +150,5 @@
       <NearestAirport>PHX</NearestAirport>
     </Address>
   </Hotel>
+
 </Hotels>
-
-
-
