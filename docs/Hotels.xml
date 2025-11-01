@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Hotels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="https://pbattu18.github.io/cse445-a4/Hotels.xsd">
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/pbattu18/cse445-a4/main/Hotels.xsd">
 
-  <!-- Required sample from handout -->
   <Hotel Id="H001" Rating="4.2">
     <Name>Westin</Name>
     <Phone>480-968-8885</Phone>
